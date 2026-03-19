@@ -1,36 +1,41 @@
 name: User Story
-description: Créer une nouvelle histoire utilisateur
+description: Standard template for user stories (Exercises 2 to 8)
 title: "[STORY]: "
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        ## Description
+        Please fill out this form to document your feature request.
   - type: textarea
-    id: story
+    id: description
     attributes:
-      label: "Format de la Story"
-      placeholder: "En tant que [rôle], je veux [but], afin de [raison]."
+      label: "User Story Description"
+      placeholder: "As a [user role], I want [action], so that [benefit]."
     validations:
       required: true
   - type: textarea
     id: criteria
     attributes:
-      label: "Critères d'acceptation"
-      placeholder: "1. Le bouton est cliquable\n2. Un message s'affiche..."
+      label: "Acceptance Criteria"
+      placeholder: "1. Feature X is visible\n2. Action Y triggers Z..."
   - type: dropdown
     id: priority
     attributes:
-      label: Priorité
+      label: "Priority"
       options:
-        - High
-        - Medium
-        - Low
+        - "priority: high"
+        - "priority: medium"
+        - "priority: low"
     validations:
       required: true
   - type: input
     id: points
     attributes:
-      label: "Story Points (Estimation)"
+      label: "Estimation (Story Points)"
       placeholder: "1, 2, 3, 5, 8..."
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Additional Notes"
+      placeholder: "Technical constraints, linked bugs, or reminders (e.g., default credentials)."
