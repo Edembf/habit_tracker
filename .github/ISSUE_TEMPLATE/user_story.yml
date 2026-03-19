@@ -1,1 +1,36 @@
-
+name: User Story
+description: Créer une nouvelle histoire utilisateur
+title: "[STORY]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Description
+  - type: textarea
+    id: story
+    attributes:
+      label: "Format de la Story"
+      placeholder: "En tant que [rôle], je veux [but], afin de [raison]."
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: "Critères d'acceptation"
+      placeholder: "1. Le bouton est cliquable\n2. Un message s'affiche..."
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorité
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+  - type: input
+    id: points
+    attributes:
+      label: "Story Points (Estimation)"
+      placeholder: "1, 2, 3, 5, 8..."
