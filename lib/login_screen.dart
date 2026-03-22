@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'habit_tracker_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -18,35 +18,19 @@ class _LoginScreenState extends State<LoginScreen> {
   final String defaultUsername = 'testuser';
   final String defaultPassword = 'password123';
 
-  void _login() async {
+  void _login() {
+    // The login logic goes here
+    print("login logic here");
+
     final username = _usernameController.text;
     final password = _passwordController.text;
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    // Check against default credentials
     if (username == defaultUsername && password == defaultPassword) {
-      await prefs.setString('name', 'Test User');
-      await prefs.setString('username', 'testuser');
-      await prefs.setDouble('age', 25);
-      await prefs.setString('country', 'United States');
-
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => HabitTrackerScreen(username: username),
         ),
-      );
-    } else {
-      //empty out shared preferences
-      await prefs.clear();
-      Fluttertoast.showToast(
-        msg: "The username or password was incorrect",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
       );
     }
   }
@@ -68,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Habitt',
                   style: TextStyle(
                     fontSize: 32,
@@ -76,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -85,16 +69,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextField(
                     controller: _usernameController,
                     decoration: InputDecoration(
-                      prefixIcon:
-                          Icon(Icons.email, color: Colors.blue.shade700),
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Colors.blue.shade700,
+                      ),
                       hintText: 'Enter Username',
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 15,
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -107,25 +95,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Icon(Icons.lock, color: Colors.blue.shade700),
                       hintText: 'Enter Password',
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 15,
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
                       // Logic for forgot password can be added here
                     },
-                    child: Text(
+                    child: const Text(
                       'Forgot password?',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
@@ -133,9 +123,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 80,
+                      vertical: 15,
+                    ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Log in',
                     style: TextStyle(
                       fontSize: 18,
@@ -144,27 +137,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
-                  'or',
-                  style: TextStyle(color: Colors.white70),
-                ),
-                SizedBox(height: 10),
+                const SizedBox(height: 20),
+                const Text('or', style: TextStyle(color: Colors.white70)),
+                const SizedBox(height: 10),
                 OutlinedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RegisterScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ),
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.white),
+                    side: const BorderSide(color: Colors.white),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 70, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 70,
+                      vertical: 15,
+                    ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Sign up',
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),

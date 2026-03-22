@@ -1,9 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'add_habit_screen.dart';
 
 class HabitTrackerScreen extends StatefulWidget {
   final String username;
@@ -22,24 +17,10 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
   @override
   void initState() {
     super.initState();
-    _loadUserData();
-  }
-
-  Future<void> _loadUserData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      name = prefs.getString('name') ?? widget.username;
-      selectedHabitsMap = Map<String, String>.from(
-          jsonDecode(prefs.getString('selectedHabitsMap') ?? '{}'));
-      completedHabitsMap = Map<String, String>.from(
-          jsonDecode(prefs.getString('completedHabitsMap') ?? '{}'));
-    });
   }
 
   Future<void> _saveHabits() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedHabitsMap', jsonEncode(selectedHabitsMap));
-    await prefs.setString('completedHabitsMap', jsonEncode(completedHabitsMap));
+    //save habits to preferences in the future
   }
 
   Color _getColorFromHex(String hexColor) {
@@ -67,6 +48,15 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade700,
+        centerTitle: true,
+        // Ajout du bouton menu à gauche
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () {
+            // Action pour ouvrir le Drawer par exemple
+            // Scaffold.of(context).openDrawer();
+          },
+        ),
         title: Text(
           name.isNotEmpty ? name : 'Loading...',
           style: const TextStyle(
@@ -83,10 +73,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
             padding: EdgeInsets.all(8.0),
             child: Text(
               'To Do 📝',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           selectedHabitsMap.isEmpty
@@ -104,8 +91,10 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                     itemCount: selectedHabitsMap.length,
                     itemBuilder: (context, index) {
                       String habit = selectedHabitsMap.keys.elementAt(index);
-                      Color habitColor =
-                          _getHabitColor(habit, selectedHabitsMap);
+                      Color habitColor = _getHabitColor(
+                        habit,
+                        selectedHabitsMap,
+                      );
                       return Dismissible(
                         key: Key(habit),
                         direction: DismissDirection.endToStart,
@@ -137,15 +126,12 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                     },
                   ),
                 ),
-          Divider(),
+          const Divider(),
           const Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Done ✅🎉',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           completedHabitsMap.isEmpty
@@ -162,8 +148,10 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                     itemCount: completedHabitsMap.length,
                     itemBuilder: (context, index) {
                       String habit = completedHabitsMap.keys.elementAt(index);
-                      Color habitColor =
-                          _getHabitColor(habit, completedHabitsMap);
+                      Color habitColor = _getHabitColor(
+                        habit,
+                        completedHabitsMap,
+                      );
                       return Dismissible(
                         key: Key(habit),
                         direction: DismissDirection.startToEnd,
@@ -177,7 +165,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                         background: Container(
                           color: Colors.red,
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: const Row(
                             children: [
                               Icon(Icons.undo, color: Colors.white),
@@ -189,8 +177,11 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                             ],
                           ),
                         ),
-                        child: _buildHabitCard(habit, habitColor,
-                            isCompleted: true),
+                        child: _buildHabitCard(
+                          habit,
+                          habitColor,
+                          isCompleted: true,
+                        ),
                       );
                     },
                   ),
@@ -199,26 +190,20 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
       ),
       floatingActionButton: selectedHabitsMap.isEmpty
           ? FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddHabitScreen(),
-                  ),
-                ).then((_) {
-                  _loadUserData(); // Reload data after returning
-                });
-              },
-              child: Icon(Icons.add),
+              onPressed: () {},
               backgroundColor: Colors.blue.shade700,
               tooltip: 'Add Habits',
+              child: const Icon(Icons.add),
             )
           : null,
     );
   }
 
-  Widget _buildHabitCard(String title, Color color,
-      {bool isCompleted = false}) {
+  Widget _buildHabitCard(
+    String title,
+    Color color, {
+    bool isCompleted = false,
+  }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: color,
@@ -234,7 +219,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
             ),
           ),
           trailing: isCompleted
-              ? Icon(Icons.check_circle, color: Colors.green, size: 28)
+              ? const Icon(Icons.check_circle, color: Colors.green, size: 28)
               : null,
         ),
       ),
