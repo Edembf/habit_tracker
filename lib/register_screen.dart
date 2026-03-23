@@ -31,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     'Sleep 8 Hours',
     'Eat Healthy',
     'Journal',
-    'Walk 10,000 Steps'
+    'Walk 10,000 Steps',
   ];
   final Map<String, Color> _habitColors = {
     'Amber': Colors.amber,
@@ -153,18 +153,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
         child: Center(
           child: SingleChildScrollView(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 8.0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildInputField(_nameController, 'Name', Icons.person),
                 SizedBox(height: 10),
                 _buildInputField(
-                    _usernameController, 'Username', Icons.alternate_email),
+                  _usernameController,
+                  'Username',
+                  Icons.alternate_email,
+                ),
                 SizedBox(height: 10),
-                Text('Age: ${_age.round()}',
-                    style: TextStyle(color: Colors.white, fontSize: 18)),
+                Text(
+                  'Age: ${_age.round()}',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
                 Slider(
                   value: _age,
                   min: 21,
@@ -181,8 +188,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 10),
                 _buildCountryDropdown(),
                 SizedBox(height: 10),
-                Text('Select Your Habits',
-                    style: TextStyle(color: Colors.white, fontSize: 18)),
+                Text(
+                  'Select Your Habits',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
                 Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -191,11 +200,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     return GestureDetector(
                       onTap: () => _toggleHabitSelection(habit),
                       child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
-                          color:
-                              isSelected ? Colors.blue.shade600 : Colors.white,
+                          color: isSelected
+                              ? Colors.blue.shade600
+                              : Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: Colors.blue.shade700),
                         ),
@@ -220,8 +232,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                       ),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 80,
+                        vertical: 15,
+                      ),
                     ),
                     child: Text(
                       'Register',
@@ -242,7 +256,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildInputField(
-      TextEditingController controller, String hint, IconData icon) {
+    TextEditingController controller,
+    String hint,
+    IconData icon,
+  ) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -273,10 +290,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         isExpanded: true,
         underline: SizedBox(),
         items: _countries.map((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
+          return DropdownMenuItem<String>(value: value, child: Text(value));
         }).toList(),
         onChanged: (newValue) {
           setState(() {

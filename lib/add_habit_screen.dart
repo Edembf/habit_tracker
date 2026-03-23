@@ -38,9 +38,11 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
     setState(() {
       // Load habits from both maps
       selectedHabitsMap = Map<String, String>.from(
-          jsonDecode(prefs.getString('selectedHabitsMap') ?? '{}'));
+        jsonDecode(prefs.getString('selectedHabitsMap') ?? '{}'),
+      );
       completedHabitsMap = Map<String, String>.from(
-          jsonDecode(prefs.getString('completedHabitsMap') ?? '{}'));
+        jsonDecode(prefs.getString('completedHabitsMap') ?? '{}'),
+      );
     });
   }
 
@@ -53,7 +55,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   @override
   Widget build(BuildContext context) {
     // Combine both maps for display, ensuring no duplicates
-    Map<String, String> allHabitsMap = {...selectedHabitsMap, ...completedHabitsMap};
+    Map<String, String> allHabitsMap = {
+      ...selectedHabitsMap,
+      ...completedHabitsMap,
+    };
 
     return Scaffold(
       appBar: AppBar(
@@ -100,7 +105,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                       ),
                       child: Text(
                         colorName,
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   );
@@ -119,8 +127,9 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                 if (_habitController.text.isNotEmpty) {
                   setState(() {
                     // Add the new habit to the selectedHabitsMap with the chosen color
-                    selectedHabitsMap[_habitController.text] =
-                        selectedColor.value.toRadixString(16);
+                    selectedHabitsMap[_habitController.text] = selectedColor
+                        .value
+                        .toRadixString(16);
                     _habitController.clear();
                     selectedColorName = 'Amber'; // Reset to default
                     selectedColor = _habitColors[selectedColorName]!;
@@ -137,7 +146,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -147,9 +159,7 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   final habitName = entry.key;
                   final habitColor = _getColorFromHex(entry.value);
                   return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: habitColor,
-                    ),
+                    leading: CircleAvatar(backgroundColor: habitColor),
                     title: Text(habitName),
                     trailing: IconButton(
                       icon: Icon(Icons.delete, color: Colors.red),

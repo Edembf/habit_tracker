@@ -30,9 +30,11 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     setState(() {
       name = prefs.getString('name') ?? widget.username;
       selectedHabitsMap = Map<String, String>.from(
-          jsonDecode(prefs.getString('selectedHabitsMap') ?? '{}'));
+        jsonDecode(prefs.getString('selectedHabitsMap') ?? '{}'),
+      );
       completedHabitsMap = Map<String, String>.from(
-          jsonDecode(prefs.getString('completedHabitsMap') ?? '{}'));
+        jsonDecode(prefs.getString('completedHabitsMap') ?? '{}'),
+      );
     });
   }
 
@@ -83,10 +85,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
             padding: EdgeInsets.all(8.0),
             child: Text(
               'To Do 📝',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           selectedHabitsMap.isEmpty
@@ -104,8 +103,10 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                     itemCount: selectedHabitsMap.length,
                     itemBuilder: (context, index) {
                       String habit = selectedHabitsMap.keys.elementAt(index);
-                      Color habitColor =
-                          _getHabitColor(habit, selectedHabitsMap);
+                      Color habitColor = _getHabitColor(
+                        habit,
+                        selectedHabitsMap,
+                      );
                       return Dismissible(
                         key: Key(habit),
                         direction: DismissDirection.endToStart,
@@ -142,10 +143,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               'Done ✅🎉',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           completedHabitsMap.isEmpty
@@ -162,8 +160,10 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                     itemCount: completedHabitsMap.length,
                     itemBuilder: (context, index) {
                       String habit = completedHabitsMap.keys.elementAt(index);
-                      Color habitColor =
-                          _getHabitColor(habit, completedHabitsMap);
+                      Color habitColor = _getHabitColor(
+                        habit,
+                        completedHabitsMap,
+                      );
                       return Dismissible(
                         key: Key(habit),
                         direction: DismissDirection.startToEnd,
@@ -189,8 +189,11 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                             ],
                           ),
                         ),
-                        child: _buildHabitCard(habit, habitColor,
-                            isCompleted: true),
+                        child: _buildHabitCard(
+                          habit,
+                          habitColor,
+                          isCompleted: true,
+                        ),
                       );
                     },
                   ),
@@ -202,9 +205,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => AddHabitScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => AddHabitScreen()),
                 ).then((_) {
                   _loadUserData(); // Reload data after returning
                 });
@@ -217,8 +218,11 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     );
   }
 
-  Widget _buildHabitCard(String title, Color color,
-      {bool isCompleted = false}) {
+  Widget _buildHabitCard(
+    String title,
+    Color color, {
+    bool isCompleted = false,
+  }) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: color,

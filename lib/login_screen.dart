@@ -85,12 +85,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: TextField(
                     controller: _usernameController,
                     decoration: InputDecoration(
-                      prefixIcon:
-                          Icon(Icons.email, color: Colors.blue.shade700),
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Colors.blue.shade700,
+                      ),
                       hintText: 'Enter Username',
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 15,
+                      ),
                     ),
                   ),
                 ),
@@ -107,8 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Icon(Icons.lock, color: Colors.blue.shade700),
                       hintText: 'Enter Password',
                       border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 15,
+                      ),
                     ),
                   ),
                 ),
@@ -145,10 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  'or',
-                  style: TextStyle(color: Colors.white70),
-                ),
+                Text('or', style: TextStyle(color: Colors.white70)),
                 SizedBox(height: 10),
                 OutlinedButton(
                   onPressed: () {
