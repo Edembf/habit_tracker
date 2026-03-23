@@ -137,10 +137,6 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   });
                 }
               },
-              child: Text(
-                'Add Habit',
-                style: TextStyle(color: Colors.white, fontSize: 16),
-              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.shade700,
                 shape: RoundedRectangleBorder(
@@ -150,6 +146,10 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
                   horizontal: 24,
                   vertical: 12,
                 ),
+              ),
+              child: Text(
+                'Add Habit',
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
             const SizedBox(height: 20),
