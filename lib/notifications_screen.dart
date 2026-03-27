@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationsScreen extends StatefulWidget {
+  const NotificationsScreen({super.key});
+
   @override
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
@@ -158,7 +160,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 // Use the _sendTestNotification method to trigger the notification
                 _sendTestNotification();
               },
-              child: Text('Send Test Notification'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.shade700,
                 foregroundColor: Colors.white,
@@ -167,6 +168,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               ),
+              child: Text('Send Test Notification'),
             ),
           ],
         ),

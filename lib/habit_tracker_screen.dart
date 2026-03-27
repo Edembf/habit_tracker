@@ -226,7 +226,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
                 ),
           const Divider(),
           const Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Done ✅🎉',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -322,7 +322,7 @@ class _HabitTrackerScreenState extends State<HabitTrackerScreen> {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: color,
-      child: Container(
+      child: SizedBox(
         height: 60, // Adjust the height for thicker cards.
         child: ListTile(
           title: Text(
